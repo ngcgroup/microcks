@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo:3.4.23
+    container_name: microcks-db
+    volumes:
+      - "~/tmp/microcks-data:/data/db"
+
+  postman:
+    image: quay.io/microcks/microcks-postman-runtime:latest
+    container_name: microcks-postman-runtime
+
+  app:
+    depends_on:
+      - mongo
+      - postman
+    image: quay.io/microcks/microcks:latest
+    container_name: microcks
+    ports:
+      - "80:8080"
+      - "9090:9090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017
+      - SPRING_DATA_MONGODB_DATABASE=microcks
+      - POSTMAN_RUNNER_URL=http://postman:3000
+      - TEST_CALLBACK_URL=http://microcks:8080
+      - SERVICES_UPDATE_INTERVAL=0 0 0/2 * * *
+      - KEYCLOAK_URL=https://bhn-kc.herokuapp.com/auth
+      - KEYCLOAK_PUBLIC_URL=https://bhn-kc.herokuapp.com/auth
+      #- MAX_UPLOAD_FILE_SIZE=3MB
