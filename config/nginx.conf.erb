@@ -26,7 +26,7 @@ http {
 		listen <%= ENV["PORT"] %>;
 
 		location / {
-		    proxy_ssl_verify on;
+		    proxy_ssl_verify off;
 		    proxy_ssl_server_name on;
 		    proxy_ssl_name dockhero-vertical-79141-flexible-ssl.dockhero.io;
 		    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
