@@ -24,13 +24,8 @@ http {
 		location / {
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 			proxy_set_header Host $http_host;
-			proxy_set_header X_FORWARDED_PROTO https;
-			proxy_ssl_verify              off;
-			proxy_set_header X-Forwarded-Ssl on;
-			proxy_set_header X-Forwarded-HTTPS on;
-
-           	proxy_set_header X-Forwarded-Protocol https;
-            
+	#		proxy_set_header X_FORWARDED_PROTO https;
+			proxy_ssl_verify              off;          
             proxy_ssl_session_reuse        off;
     		proxy_ssl_name <%= ENV["UPSTREAM_SERVER_NAME"] %>;
 			proxy_redirect off;
