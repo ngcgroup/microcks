@@ -16,6 +16,8 @@ services:
       - mongo
       - postman
     image: quay.io/microcks/microcks:latest
+    volumes:
+      - "./config:/deployments/config"
     container_name: microcks
     ports:
       - "80:8080"
