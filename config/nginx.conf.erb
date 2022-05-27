@@ -15,6 +15,9 @@ http {
 	error_log logs/nginx/error.log;
 
 	server_tokens off;
+	 proxy_ssl_server_name on;
+    # resolver needs to be set because we're using dynamic proxy_pass
+    resolver 8.8.8.8;
 	upstream upstream_app {
         server <%= ENV["UPSTREAM_SERVER"] %>;
     }
@@ -31,7 +34,6 @@ http {
 			proxy_ssl_verify              off;
 			proxy_redirect off;
 			proxy_ssl_name <%= ENV["UPSTREAM_SERVER_NAME"] %>;
-			proxy_ssl_server_name on;
 			proxy_pass https://upstream_app;
 		}
 
