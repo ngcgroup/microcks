@@ -31,7 +31,7 @@ http {
 			proxy_set_header X_FORWARDED_PROTO https;
 			proxy_ssl_verify              off;
 			proxy_ssl_server_name on;
-
+    		proxy_ssl_name <%= ENV["UPSTREAM_SERVER_NAME"] %>;;
 			proxy_redirect off;
 			proxy_pass <%= ENV["UPSTREAM_SERVER"] %>;
 		}
