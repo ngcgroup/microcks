@@ -8,3 +8,11 @@ The deployment will be made with a single Performance-M dyno (it won't run very 
 due to Java's memory hunger) with a free Postgres database attached.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+```
+heroku login
+heroku dh:compose --app microcks up -d
+heroku dh:docker --app microcks ps
+heroku dh:compose --app microcks logs -f
+
+````
