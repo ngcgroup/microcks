@@ -25,6 +25,8 @@ http {
 #			proxy_buffering off;
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 			proxy_set_header Host $http_host;
+			proxy_set_header X_FORWARDED_PROTO https;
+			proxy_ssl_verify              off;
 			proxy_redirect off;
 			proxy_pass <%= ENV["UPSTREAM_SERVER"] %>;
 		}
